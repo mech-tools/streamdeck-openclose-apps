@@ -1,7 +1,8 @@
 {
   "scripts": {
     "build": "rollup -c",
-    "watch": "rollup -c -w --watch.onEnd=\"streamdeck restart com.darkdindon.openclose-apps\""
+    "watch": "rollup -c -w --watch.onEnd=\"streamdeck restart com.darkdindon.openclose-apps\"",
+    "pack": "npm run build && streamdeck pack com.darkdindon.openclose-apps.sdPlugin --force"
   },
   "type": "module",
   "devDependencies": {

@@ -1,44 +1,46 @@
 {
-  "Name": "Open/Close Apps",
-  "Version": "0.1.0.0",
-  "Author": "DarKDinDoN",
-  "Actions": [
-    {
-      "Name": "Open/Close",
-      "UUID": "com.darkdindon.openclose-apps.openclose",
-      "Icon": "imgs/plugin/icon",
-      "Tooltip": "Open or close an App.",
-      "Controllers": ["Keypad"],
-      "States": [
-        {
-          "Image": "imgs/action/off"
-        },
-        {
-          "Image": "imgs/action/on"
-        }
-      ],
-      "PropertyInspectorPath": "pi.html",
-      "DisableAutomaticStates": true
-    }
-  ],
-  "Category": "Open/Close Apps",
-  "CategoryIcon": "imgs/plugin/icon",
-  "CodePath": "bin/plugin.js",
-  "Description": "Simple plugin to open and close apps.",
-  "Icon": "imgs/plugin/marketplace",
-  "SDKVersion": 2,
-  "Software": {
-    "MinimumVersion": "6.5"
-  },
-  "OS": [
-    {
-      "Platform": "windows",
-      "MinimumVersion": "10"
-    }
-  ],
-  "Nodejs": {
-    "Version": "20",
-    "Debug": "enabled"
-  },
-  "UUID": "com.darkdindon.openclose-apps"
+	"Name": "Open/Close Apps",
+	"Version": "0.1.0.0",
+	"Author": "DarKDinDoN",
+	"Actions": [
+		{
+			"Name": "Open/Close",
+			"UUID": "com.darkdindon.openclose-apps.openclose",
+			"Icon": "imgs/plugin/icon",
+			"Tooltip": "Open or close an App.",
+			"Controllers": [
+				"Keypad"
+			],
+			"States": [
+				{
+					"Image": "imgs/action/off"
+				},
+				{
+					"Image": "imgs/action/on"
+				}
+			],
+			"PropertyInspectorPath": "pi.html",
+			"DisableAutomaticStates": true
+		}
+	],
+	"Category": "Open/Close Apps",
+	"CategoryIcon": "imgs/plugin/icon",
+	"CodePath": "bin/plugin.js",
+	"Description": "Simple plugin to open and close apps.",
+	"Icon": "imgs/plugin/marketplace",
+	"SDKVersion": 2,
+	"Software": {
+		"MinimumVersion": "6.5"
+	},
+	"OS": [
+		{
+			"Platform": "windows",
+			"MinimumVersion": "10"
+		}
+	],
+	"Nodejs": {
+		"Version": "20",
+		"Debug": "enabled"
+	},
+	"UUID": "com.darkdindon.openclose-apps"
 }
