@@ -1,0 +1,9 @@
+{
+  /* Prefer tabs over spaces for accessibility */
+  "editor.insertSpaces": false,
+  "editor.detectIndentation": true,
+  /* Explorer */
+  "files.exclude": {
+    "node_modules": true
+  }
+}

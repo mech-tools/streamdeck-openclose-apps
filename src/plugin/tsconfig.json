@@ -1,0 +1,12 @@
+{
+  "compilerOptions": {
+    "customConditions": ["node"],
+    "lib": ["es2022"],
+    "module": "es2022",
+    "target": "es2022",
+    "esModuleInterop": true,
+    "moduleResolution": "Bundler"
+  },
+  "include": ["./"],
+  "exclude": ["node_modules"]
+}

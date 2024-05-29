@@ -1,0 +1,45 @@
+#icons .sdpi-item-group {
+  text-align: center;
+  width: 100%;
+}
+
+#icons img {
+  border-radius: 16px;
+  border: 4px var(--sdpi-bordercolor) solid;
+  background-color: #000000;
+}
+
+#generateIcons {
+  margin-top: 10px;
+  margin-right: 12px;
+  margin-bottom: 15px;
+}
+
+#generateIcons:disabled {
+  color: inherit;
+  opacity: 0.25;
+}
+
+#dotConfiguration label[for="dot"] {
+  min-width: 60px;
+}
+
+#dotConfiguration .sdpi-item {
+  max-width: 75px;
+}
+
+#dotConfiguration .sdpi-item .sdpi-item-label {
+  max-width: 35px;
+}
+
+#dotConfiguration .sdpi-item:last-child {
+  margin-left: 5px;
+}
+
+#dotConfiguration .sdpi-item:last-child input {
+  min-width: 34px;
+}
+
+.disabled-field {
+  opacity: 0.25;
+}

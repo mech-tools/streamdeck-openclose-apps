@@ -1,0 +1,375 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta
+      name="viewport"
+      content="width=device-width,initial-scale=1,maximum-scale=1,minimum-scale=1,user-scalable=no,minimal-ui,viewport-fit=cover"
+    />
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-status-bar-style" content="black" />
+    <title>Property Inspector Open/Close Apps</title>
+    <link rel="stylesheet" href="./css/sdpi.css" />
+    <link rel="stylesheet" href="./css/pi.css" />
+  </head>
+
+  <body>
+    <div class="sdpi-wrapper">
+      <div type="tabs" class="sdpi-item">
+        <div class="sdpi-item-label empty"></div>
+        <div class="tabs">
+          <div class="tab selected" data-target="#app" title="Application configuration">App</div>
+          <div class="tab" data-target="#action" title="Key configuration">Action</div>
+          <div class="tab" data-target="#creator" title="Options">Creator</div>
+        </div>
+      </div>
+
+      <hr class="tab-separator" />
+
+      <div id="app">
+        <div class="sdpi-item">
+          <div class="sdpi-item-label">Application</div>
+          <div class="sdpi-item-group file">
+            <input
+              class="sdpi-item-value sdProperty sdFile"
+              type="file"
+              id="application"
+              name="application"
+              accept="application/*, .exe"
+              oninput="$pi.processChanges(this)"
+            />
+            <label class="sdpi-file-info" for="application" id="applicationLabel"
+              >Select an application...</label
+            >
+            <label class="sdpi-file-label" for="application">Choose file...</label>
+          </div>
+        </div>
+
+        <div class="sdpi-item">
+          <div class="sdpi-item-label">Arguments</div>
+          <input
+            class="sdpi-item-value"
+            name="arguments"
+            placeholder="-other -arguments"
+            oninput="$pi.processChanges(this)"
+          />
+        </div>
+
+        <div class="sdpi-heading">OPTIONS</div>
+
+        <div type="checkbox" class="sdpi-item">
+          <div class="sdpi-item-label">Monitor</div>
+          <div class="sdpi-item-value">
+            <input name="monitor" id="monitor" type="checkbox" oninput="$pi.processChanges(this)" />
+            <label for="monitor"
+              ><span></span>Change the Stream Deck key icon based on whether the application is
+              running or not</label
+            >
+          </div>
+        </div>
+
+        <div type="checkbox" class="sdpi-item">
+          <div class="sdpi-item-label">Single instance</div>
+          <div class="sdpi-item-value">
+            <input
+              name="singleInstance"
+              id="singleInstance"
+              type="checkbox"
+              oninput="$pi.processChanges(this)"
+            />
+            <label for="singleInstance"
+              ><span></span>Run a single instance of the application</label
+            >
+          </div>
+        </div>
+
+        <div type="radio" class="sdpi-item">
+          <div class="sdpi-item-label">Window style</div>
+          <div class="sdpi-item-value min100">
+            <span class="sdpi-item-child">
+              <input
+                id="normal"
+                type="radio"
+                name="windowStyle"
+                value="Normal"
+                oninput="$pi.processChanges(this)"
+              />
+              <label for="normal" class="sdpi-item-label"><span></span>Normal</label>
+            </span>
+            <span class="sdpi-item-child">
+              <input
+                id="maximized"
+                type="radio"
+                name="windowStyle"
+                value="Maximized"
+                oninput="$pi.processChanges(this)"
+              />
+              <label for="maximized" class="sdpi-item-label"><span></span>Maximized</label>
+            </span>
+            <span class="sdpi-item-child">
+              <input
+                id="closed"
+                type="radio"
+                name="windowStyle"
+                value="Closed"
+                oninput="$pi.processChanges(this)"
+              />
+              <label for="closed" class="sdpi-item-label"><span></span>Closed</label>
+            </span>
+            <span class="sdpi-item-child">
+              <input
+                id="hidden"
+                type="radio"
+                name="windowStyle"
+                value="Hidden"
+                oninput="$pi.processChanges(this)"
+              />
+              <label for="hidden" class="sdpi-item-label"><span></span>Hidden</label>
+            </span>
+          </div>
+        </div>
+      </div>
+      <div id="action">
+        <div type="select" class="sdpi-item">
+          <div class="sdpi-item-label">Short press</div>
+          <select
+            class="sdpi-item-value select"
+            name="shortPressAction"
+            oninput="$pi.processChanges(this)"
+          >
+            <option value="NONE">None</option>
+            <option value="RUN">Run app</option>
+            <option value="RUNADMIN">Run app as administrator</option>
+            <option value="FOCUS">Focus app</option>
+            <option value="CLOSE">Close app</option>
+            <option value="KILL">Kill app</option>
+          </select>
+        </div>
+
+        <div type="select" class="sdpi-item">
+          <div class="sdpi-item-label">Double press</div>
+          <select
+            class="sdpi-item-value select"
+            name="doublePressAction"
+            oninput="$pi.processChanges(this)"
+          >
+            <option value="NONE">None</option>
+            <option value="RUN">Run app</option>
+            <option value="RUNADMIN">Run app as administrator</option>
+            <option value="FOCUS">Focus app</option>
+            <option value="CLOSE">Close app</option>
+            <option value="KILL">Kill app</option>
+          </select>
+        </div>
+
+        <div type="select" class="sdpi-item">
+          <div class="sdpi-item-label">Long press</div>
+          <select
+            class="sdpi-item-value select"
+            name="longPressAction"
+            oninput="$pi.processChanges(this)"
+          >
+            <option value="NONE">None</option>
+            <option value="RUN">Run app</option>
+            <option value="RUNADMIN">Run app as administrator</option>
+            <option value="FOCUS">Focus app</option>
+            <option value="CLOSE">Close app</option>
+            <option value="KILL">Kill app</option>
+          </select>
+        </div>
+
+        <div class="sdpi-heading">OPTIONS</div>
+
+        <div type="range" class="sdpi-item">
+          <div class="sdpi-item-label">Short press threshold</div>
+          <div class="sdpi-item-value datalist">
+            <input
+              type="range"
+              min="100"
+              max="400"
+              step="50"
+              name="shortPressThreshold"
+              list="shortPresslist"
+              oninput="$pi.processChanges(this)"
+            />
+            <datalist id="shortPresslist">
+              <option value="200">100</option>
+              <option value="200">150</option>
+              <option value="200">200</option>
+              <option value="250">250</option>
+              <option value="300">300</option>
+              <option value="350">350</option>
+              <option value="400">400</option>
+            </datalist>
+          </div>
+        </div>
+
+        <div type="range" class="sdpi-item">
+          <div class="sdpi-item-label">Long press threshold</div>
+          <div class="sdpi-item-value datalist">
+            <input
+              type="range"
+              min="300"
+              max="1000"
+              step="100"
+              name="longPressThreshold"
+              list="longPresslist"
+              oninput="$pi.processChanges(this)"
+            />
+            <datalist id="longPresslist">
+              <option value="300">300</option>
+              <option value="400">400</option>
+              <option value="500">500</option>
+              <option value="600">600</option>
+              <option value="700">700</option>
+              <option value="800">800</option>
+              <option value="900">900</option>
+              <option value="1000">1000</option>
+            </datalist>
+          </div>
+        </div>
+      </div>
+      <div id="creator">
+        <div class="sdpi-item" id="icons">
+          <div class="sdpi-item-label empty"></div>
+          <div class="sdpi-item-group">
+            <span class="sdpi-item-child">
+              <img
+                id="iconOff"
+                width="70"
+                height="70"
+                src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAQAAAC1HAwCAAAAC0lEQVR42mNkYAAAAAYAAjCB0C8AAAAASUVORK5CYII="
+              />
+            </span>
+            <span class="sdpi-item-child">
+              <img
+                id="iconOn"
+                width="70"
+                height="70"
+                src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAQAAAC1HAwCAAAAC0lEQVR42mNkYAAAAAYAAjCB0C8AAAAASUVORK5CYII="
+              />
+            </span>
+          </div>
+        </div>
+
+        <div class="sdpi-item">
+          <div class="sdpi-item-label empty"></div>
+          <button class="sdpi-item-value" id="generateIcons" onclick="$pi.generateIcons()">
+            Generate icons
+          </button>
+        </div>
+
+        <div type="radio" class="sdpi-item">
+          <div class="sdpi-item-label">Icon source</div>
+          <div class="sdpi-item-value">
+            <span class="sdpi-item-child">
+              <input id="fromFile" type="radio" name="iconSource" value="fromFile" checked />
+              <label for="fromFile" class="sdpi-item-label"><span></span>From custom file</label>
+            </span>
+            <span class="sdpi-item-child disabled-field">
+              <input id="fromApp" type="radio" name="iconSource" value="fromApp" disabled />
+              <label for="fromApp" class="sdpi-item-label"
+                ><span></span>From application icon</label
+              >
+            </span>
+          </div>
+        </div>
+
+        <div class="sdpi-item" id="fromFileInput">
+          <div class="sdpi-item-label">Custom file</div>
+          <input
+            class="sdpi-item-value"
+            type="file"
+            id="icon"
+            name="icon"
+            accept="image/*, .jpg, .jpeg, .png, .svg, .webp"
+          />
+        </div>
+
+        <div type="range" class="sdpi-item">
+          <div class="sdpi-item-label">Icon margins</div>
+          <div class="sdpi-item-value datalist">
+            <input
+              type="range"
+              min="0"
+              max="25"
+              step="5"
+              value="20"
+              id="iconMargins"
+              name="iconMargins"
+              list="iconMarginsList"
+            />
+            <datalist id="iconMarginsList">
+              <option value="0">0%</option>
+              <option value="5">5%</option>
+              <option value="10">10%</option>
+              <option value="15">15%</option>
+              <option value="20">20%</option>
+              <option value="25">25%</option>
+            </datalist>
+          </div>
+        </div>
+
+        <div type="range" class="sdpi-item">
+          <div class="sdpi-item-label">Icon saturation</div>
+          <div class="sdpi-item-value datalist">
+            <input
+              type="range"
+              min="0"
+              max="100"
+              step="5"
+              value="0"
+              id="iconSaturation"
+              name="iconSaturation"
+              list="iconSaturationList"
+            />
+            <datalist id="iconSaturationList">
+              <option value="0">0%</option>
+              <option value="5"></option>
+              <option value="10"></option>
+              <option value="15"></option>
+              <option value="20">20%</option>
+              <option value="25"></option>
+              <option value="30"></option>
+              <option value="35"></option>
+              <option value="40">40%</option>
+              <option value="45"></option>
+              <option value="50"></option>
+              <option value="55"></option>
+              <option value="60">60%</option>
+              <option value="65"></option>
+              <option value="70"></option>
+              <option value="75"></option>
+              <option value="80">80%</option>
+              <option value="85"></option>
+              <option value="90"></option>
+              <option value="95"></option>
+              <option value="100">100%</option>
+            </datalist>
+          </div>
+        </div>
+
+        <div class="sdpi-item" id="dotConfiguration">
+          <div class="sdpi-item-label">Icon dot</div>
+          <div class="sdpi-item" type="checkbox">
+            <input name="dot" id="dotActive" type="checkbox" checked />
+            <label for="dotActive"><span></span>Active</label>
+          </div>
+          <div type="color" class="sdpi-item">
+            <div class="sdpi-item-label">Color</div>
+            <input type="color" class="sdpi-item-value" id="dotColor" value="#77cc00" />
+          </div>
+          <div class="sdpi-item">
+            <div class="sdpi-item-label">Size</div>
+            <input class="sdpi-item-value" type="number" value="30" id="dotSize" />
+          </div>
+        </div>
+        <canvas id="iconCanvas" class="hidden"></canvas>
+      </div>
+    </div>
+    <div class="sdpi-info-label hidden" style="top: -1000" value=""></div>
+
+    <!-- Handle stream deck connection -->
+    <script src="./bin/pi.js"></script>
+  </body>
+</html>
