@@ -8,7 +8,7 @@ import streamDeck, {
   SendToPluginEvent,
   SingletonAction,
   WillAppearEvent,
-  WillDisappearEvent
+  WillDisappearEvent,
 } from "@elgato/streamdeck";
 import CommandRunner from "./services/CommandRunner";
 import ProcessMonitor from "./services/ProcessMonitor";
@@ -20,7 +20,7 @@ import { extractIcon, isProcessRunning } from "./utils";
  * @class OpenClose
  * @extends {SingletonAction<Settings>}
  */
-@action({ UUID: "com.darkdindon.openclose-apps.openclose" })
+@action({ UUID: "com.mech-tools.openclose-apps.openclose" })
 class OpenClose extends SingletonAction<Settings> {
   constructor() {
     super();
@@ -44,7 +44,7 @@ class OpenClose extends SingletonAction<Settings> {
   #pressEvents = {
     SHORT: "shortPressAction",
     DOUBLE: "doublePressAction",
-    LONG: "longPressAction"
+    LONG: "longPressAction",
   };
 
   /**
@@ -110,7 +110,12 @@ class OpenClose extends SingletonAction<Settings> {
    */
   async #routeAction(type: string, settings: Settings): Promise<void> {
     // Do nothing if no application is provided
-    if (!["path", "executable", "name"].every((key) => settings.application?.[key])) return;
+    if (
+      !["path", "executable", "name"].every(
+        (key) => settings.application?.[key]
+      )
+    )
+      return;
 
     // Get the appropriate route
     const route = settings[type] as RouteAction;
@@ -124,11 +129,13 @@ class OpenClose extends SingletonAction<Settings> {
     // Run the appropriate command depending on the route provided
     switch (route) {
       case "RUN":
-        if (!settings.singleInstance || !isRunning) this.#commandRunner.runProcess(settings);
+        if (!settings.singleInstance || !isRunning)
+          this.#commandRunner.runProcess(settings);
         else this.#commandRunner.focusProcess(settings);
         break;
       case "RUNADMIN":
-        if (!settings.singleInstance || !isRunning) this.#commandRunner.runProcessAsAdmin(settings);
+        if (!settings.singleInstance || !isRunning)
+          this.#commandRunner.runProcessAsAdmin(settings);
         break;
       case "FOCUS":
         if (isRunning) this.#commandRunner.focusProcess(settings);
@@ -180,10 +187,19 @@ class OpenClose extends SingletonAction<Settings> {
    * @param {DidReceiveSettingsEvent<Settings>} event the event associated with the key
    * @memberof OpenClose
    */
-  onDidReceiveSettings({ action, payload: { settings } }: DidReceiveSettingsEvent<Settings>): void {
-    if (settings.icon?.off && settings.icon?.on) this.#updateIcons(action, settings);
+  onDidReceiveSettings({
+    action,
+    payload: { settings },
+  }: DidReceiveSettingsEvent<Settings>): void {
+    if (settings.icon?.off && settings.icon?.on)
+      this.#updateIcons(action, settings);
 
-    if (!["path", "executable", "name"].every((key) => settings.application?.[key])) return;
+    if (
+      !["path", "executable", "name"].every(
+        (key) => settings.application?.[key]
+      )
+    )
+      return;
 
     if (settings.monitor) this.#startMonitoring(action, settings);
     else this.#stopMonitoring(action, settings);
@@ -196,10 +212,19 @@ class OpenClose extends SingletonAction<Settings> {
    * @param {onWillAppear<Settings>} event the event associated with the key
    * @memberof OpenClose
    */
-  async onWillAppear({ action, payload: { settings } }: WillAppearEvent<Settings>): Promise<void> {
-    if (settings.icon?.off && settings.icon?.on) this.#updateIcons(action, settings);
+  async onWillAppear({
+    action,
+    payload: { settings },
+  }: WillAppearEvent<Settings>): Promise<void> {
+    if (settings.icon?.off && settings.icon?.on)
+      this.#updateIcons(action, settings);
 
-    if (!["path", "executable", "name"].every((key) => settings.application?.[key])) return;
+    if (
+      !["path", "executable", "name"].every(
+        (key) => settings.application?.[key]
+      )
+    )
+      return;
     if (!settings.monitor) return;
 
     this.#startMonitoring(action, settings);
@@ -211,8 +236,16 @@ class OpenClose extends SingletonAction<Settings> {
    * @param {onWillDisappear<Settings>} event the event associated with the key
    * @memberof OpenClose
    */
-  onWillDisappear({ action, payload: { settings } }: WillDisappearEvent<Settings>): void {
-    if (!["path", "executable", "name"].every((key) => settings.application?.[key])) return;
+  onWillDisappear({
+    action,
+    payload: { settings },
+  }: WillDisappearEvent<Settings>): void {
+    if (
+      !["path", "executable", "name"].every(
+        (key) => settings.application?.[key]
+      )
+    )
+      return;
     if (!settings.monitor) return;
 
     this.#stopMonitoring(action, settings);
@@ -235,15 +268,22 @@ class OpenClose extends SingletonAction<Settings> {
    * @param {Settings} settings the settings associated with the key
    * @memberof OpenClose
    */
-  async #startMonitoring(action: Action<Settings>, settings: Settings): Promise<void> {
+  async #startMonitoring(
+    action: Action<Settings>,
+    settings: Settings
+  ): Promise<void> {
     (await isProcessRunning(settings.application.executable))
       ? action.setState(1)
       : action.setState(0);
 
-    this.#processMonitor.subscribe(settings.application.executable, action.id, (event) => {
-      if (event === "started") action.setState(1);
-      else action.setState(0);
-    });
+    this.#processMonitor.subscribe(
+      settings.application.executable,
+      action.id,
+      (event) => {
+        if (event === "started") action.setState(1);
+        else action.setState(0);
+      }
+    );
   }
 
   /**
@@ -253,7 +293,10 @@ class OpenClose extends SingletonAction<Settings> {
    * @memberof OpenClose
    */
   #stopMonitoring(action: Action<Settings>, settings: Settings): void {
-    this.#processMonitor.unsubscribe(settings.application.executable, action.id);
+    this.#processMonitor.unsubscribe(
+      settings.application.executable,
+      action.id
+    );
     action.setState(0);
   }
 }

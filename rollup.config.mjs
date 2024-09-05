@@ -6,7 +6,7 @@ import path from "node:path";
 import url from "node:url";
 
 const isWatching = !!process.env.ROLLUP_WATCH;
-const sdPlugin = "com.darkdindon.openclose-apps.sdPlugin";
+const sdPlugin = "com.mech-tools.openclose-apps.sdPlugin";
 
 /**
  * @type {import('rollup').RollupOptions}
@@ -17,33 +17,39 @@ const plugin = {
     file: `${sdPlugin}/bin/plugin.js`,
     sourcemap: isWatching,
     sourcemapPathTransform: (relativeSourcePath, sourcemapPath) => {
-      return url.pathToFileURL(path.resolve(path.dirname(sourcemapPath), relativeSourcePath)).href;
-    }
+      return url.pathToFileURL(
+        path.resolve(path.dirname(sourcemapPath), relativeSourcePath)
+      ).href;
+    },
   },
   plugins: [
     {
       name: "watch-externals",
       buildStart: function () {
         this.addWatchFile(`${sdPlugin}/manifest.json`);
-      }
+      },
     },
     typescript({
-      mapRoot: isWatching ? "./" : undefined
+      mapRoot: isWatching ? "./" : undefined,
     }),
     nodeResolve({
       browser: false,
       exportConditions: ["node"],
-      preferBuiltins: true
+      preferBuiltins: true,
     }),
     commonjs(),
     !isWatching && terser(),
     {
       name: "emit-module-package-file",
       generateBundle() {
-        this.emitFile({ fileName: "package.json", source: `{ "type": "module" }`, type: "asset" });
-      }
-    }
-  ]
+        this.emitFile({
+          fileName: "package.json",
+          source: `{ "type": "module" }`,
+          type: "asset",
+        });
+      },
+    },
+  ],
 };
 
 const pi = {
@@ -54,26 +60,28 @@ const pi = {
     format: "iife",
     name: "$pi",
     sourcemapPathTransform: (relativeSourcePath, sourcemapPath) => {
-      return url.pathToFileURL(path.resolve(path.dirname(sourcemapPath), relativeSourcePath)).href;
-    }
+      return url.pathToFileURL(
+        path.resolve(path.dirname(sourcemapPath), relativeSourcePath)
+      ).href;
+    },
   },
   plugins: [
     {
       name: "watch-externals",
       buildStart: function () {
         this.addWatchFile(`${sdPlugin}/manifest.json`);
-      }
+      },
     },
     typescript({
       tsconfig: "src/pi/tsconfig.json",
-      mapRoot: isWatching ? "./" : undefined
+      mapRoot: isWatching ? "./" : undefined,
     }),
     nodeResolve({
-      browser: true
+      browser: true,
     }),
     commonjs(),
-    !isWatching && terser()
-  ]
+    !isWatching && terser(),
+  ],
 };
 
 export default [plugin, pi];
